@@ -4,10 +4,10 @@ import  org.iesalandalus.programacion.utilidades.Entrada;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
+
 
 
 public class Consola {
@@ -57,7 +57,7 @@ public class Consola {
 	        do{
 	            System.out.println("Introduce nombre del aula");
 	            nombreAula=Entrada.cadena();
-	        }while(nombreAula==null||nombreAula.equals(""));
+	        }while(nombreAula==null||nombreAula.trim() == "");
 	        return nombreAula;
 	    }
 	    
@@ -72,7 +72,7 @@ public class Consola {
 	        String telefono = Entrada.cadena();
 	        
 	        
-	        if(telefono==null || telefono.equals("")){
+	        if(telefono==null || telefono.trim() == ""){
 	        	return new Profesor(leerNombreProfesor(), correo);
 	        }else{
 	        	return new Profesor(leerNombreProfesor(), correo, telefono);
@@ -111,10 +111,15 @@ public class Consola {
 	    //Método leerDia
 	    public static LocalDate leerDia(){
 	     LocalDate fecha=null;
-	        do{
-	        System.out.println("Introduce una fecha con formato dd/mm/aaaa: ");
-	        fecha=LocalDate.parse(Entrada.cadena(), FORMATO_DIA);
-	       }while(fecha==null);
+	     System.out.println("Introduce una fecha con el formato dd/mm/aaaa: ");
+	        	try {
+	        			 fecha=LocalDate.parse(Entrada.cadena(), FORMATO_DIA);
+	        			 
+	        	}catch (DateTimeParseException e) {
+					System.out.println("Formato incorrecto");
+				}
+
+
 	        return fecha;
 	    }
 	}

@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.controlador;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo;
@@ -70,17 +72,17 @@ public class Controlador {
 		}
 
 		// Método representarAulas
-		public String[] representarAulas() {
+		public List<String> representarAulas() {
 			return modelo.representarAulas();
 		}
 
 		// Método representarProfesores
-		public String[] representarProfesores() {
+		public List<String> representarProfesores() {
 			return modelo.representarProfesores();
 		}
 
 		// Método representarReservas
-		public String[] representarReservas() {
+		public List<String>representarReservas() {
 			return modelo.representarReservas();
 		}
 		
@@ -96,17 +98,17 @@ public class Controlador {
 		}
 
 		// Método getReservasProfesor(Profesor)
-		public Reserva[] getReservasProfesor(Profesor profesor) {
+		public List<Reserva> getReservasProfesor(Profesor profesor) {
 			return modelo.getReservasProfesor(profesor);
 		}
 
 		// Método getReservasAula(Aula)
-		public Reserva[] getReservasAula(Aula aula) {
+		public List<Reserva> getReservasAula(Aula aula) {
 			return modelo.getReservasAula(aula);
 		}
 
 		// Método getReservasPermanencia(Permanencia)
-		public Reserva[] getReservasPermanencia(Permanencia permanencia) {
+		public List<Reserva> getReservasPermanencia(Permanencia permanencia) {
 			return modelo.getReservasPermanencia(permanencia);
 		}
 

@@ -1,7 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 
 
-	import javax.naming.OperationNotSupportedException; 
+	import java.util.List;
+
+import javax.naming.OperationNotSupportedException; 
 	import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Aulas;
 	import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Profesores;
 	import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.Reservas;
@@ -11,28 +13,27 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 	import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 	
 	public class Modelo {
-		private static int CAPACIDAD = 10;
-		 private Profesores profesores;
+		   private Profesores profesores;
 		    private Aulas aulas;
 		    private Reservas reservas;
 		    
 		    public Modelo(){   
-		    	aulas = new Aulas(CAPACIDAD);
-				profesores = new Profesores(CAPACIDAD);
-				reservas = new Reservas(CAPACIDAD);
+		    	aulas = new Aulas();
+				profesores = new Profesores();
+				reservas = new Reservas();
 		    }
 		        
-		    public Aula[] getAulas(){
-		        return aulas.get();
+			public List<Aula> getAulas(Aula aula) {
+				return aulas.getAulas();
 		    }
 		    
-		    public int getNumAulas(){
-		        return getAulas().length;
-		    }
-		    
-		    public String[] representarAulas(){
-		        return aulas.representar();
-		    }
+			public int getNumAulas() {
+				return aulas.getNumAulas();
+			}
+
+			public List<String> representarAulas() {
+				return aulas.representar();
+			}
 		    
 		    public Aula buscarAula(Aula aula){
 		        return aulas.buscar(aula);
@@ -46,17 +47,17 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 		        aulas.borrar(aula);
 		    }
 		    
-		    public Profesor[] getProfesores(){
-		        return profesores.get();
-		    }
-		    
-		    public int getNumProfesores(){
-		        return  getProfesores().length;
-		    }
-		    
-		    public String[] representarProfesores(){
-		        return profesores.representar();
-		    }
+			public List<Profesor> getProfesores(Profesor profesor) {
+				return profesores.getProfesores();
+			}
+
+			public int getNumProfesores() {
+				return profesores.getNumProfesores();
+			}
+
+			public List<String> representarProfesores() {
+				return profesores.representar();
+			}
 		    
 		    public Profesor buscarProfesor(Profesor profesor){
 		        return profesores.buscar(profesor);
@@ -70,17 +71,17 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 		        profesores.borrar(profesor);
 		    }
 		    
-		    public Reserva[] getReservas(){
-		        return reservas.get();
-		    }
-		    
-		    public int getNumReservas(){
-		        return getReservas().length;
-		    }
-		    
-		    public String[] representarReservas(){
-		        return reservas.representar();
-		    }
+			public List<Reserva> getReservas(Reserva reserva) {
+				return reservas.getReservas();
+			}
+
+			public int getNumReservas() {
+				return reservas.getNumReservas();
+			}
+
+			public List<String> representarReservas() {
+				return reservas.representar();
+			}
 		    
 		    public Reserva buscarReserva(Reserva reserva){
 		        return reservas.buscar(reserva);
@@ -93,18 +94,18 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 		    public void anularReserva(Reserva reserva) throws OperationNotSupportedException, IllegalArgumentException{
 		        reservas.borrar(reserva);
 		    }
-		    
-		    public Reserva[] getReservasAula(Aula aula){
-		        return reservas.getReservasAula(aula);
-		    }
-		    
-		    public Reserva[] getReservasProfesor(Profesor profesor){
-		        return reservas.getReservasProfesor(profesor);
-		    }
-		    
-		    public Reserva[] getReservasPermanencia(Permanencia permanencia){
-		        return reservas.getReservasPermanencia(permanencia);
-		    }
+
+			public List<Reserva> getReservasProfesor(Profesor profesor) {
+				return reservas.getReservasProfesor(profesor);
+			}
+
+			public List<Reserva> getReservasAula(Aula aula) {
+				return reservas.getReservasAula(aula);
+			}
+
+			public List<Reserva> getReservasPermanencia(Permanencia permanencia) {
+				return reservas.getReservasPermanencia(permanencia);
+			}
 		    
 		    public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia){
 		        return reservas.consultarDisponibilidad(aula, permanencia);
