@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 import java.util.Objects;
 
 
-public class Profesor { //Atributos
+public class Profesor { //Atributos 
     private static final String ER_TELEFONO = "[6-9][0-9]{8}";
     private static final String ER_CORREO = "([a-zA-z0-9.-_]{1,})(\\@[a-zA-z]{1,})(\\.[a-z]{1,3})";
     private String nombre;
@@ -30,7 +30,7 @@ public class Profesor { //Atributos
 		setCorreo(profesor.getCorreo());
 	}
     
-    //Set y Get de los atributos
+    //Set y Get de los atributos. El set usa el formateaNombre
     private void setNombre(String nombre) {        
         if(nombre==null){       
             throw new NullPointerException("El nombre del profesor no puede ser nulo.");
@@ -38,8 +38,24 @@ public class Profesor { //Atributos
         else if(nombre.trim() == ""){        
             throw new IllegalArgumentException("El nombre del profesor no puede estar vacío.");       
         }
-            this.nombre=nombre;
+            this.nombre = formateaNombre(nombre);
     }
+    
+ 
+  //Método formateaNombre
+  		private String formateaNombre(String nombre) {
+  			nombre = nombre.trim().replaceAll("\\s{2,}", " ").toLowerCase();
+  			String [] formatea = nombre.split(" ");
+  			String Nombre2 = "";
+  			for (int i=0; i<=formatea.length-1; i++) {
+  				formatea[i] = formatea[i].substring(0,1).toUpperCase() + formatea[i].substring(1).toLowerCase();
+  				Nombre2 = Nombre2 + formatea[i] + " ";
+  			}
+  			nombre = Nombre2.trim();
+  			return nombre;
+  		}
+
+
     
     
     public void setCorreo(String correo) {       
@@ -52,7 +68,7 @@ public class Profesor { //Atributos
             this.correo=correo;        
     }
     
-    
+          
 	public void setTelefono(String telefono){
 		if (telefono == null) {
 			this.telefono = null;
