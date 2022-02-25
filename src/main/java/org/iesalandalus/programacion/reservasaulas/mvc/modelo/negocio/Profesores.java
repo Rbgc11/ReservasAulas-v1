@@ -1,133 +1,105 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
-public class Profesores{
-	private int capacidad;
-	private int tamano;
-	 private Profesor[] coleccionProfesores;
+public class Profesores {
+	// Atributos
+	List<Profesor> coleccionProfesores;
 
-	// Constructor con parámetros
-		public Profesores(int capacidadProfesores) {
-			if (capacidadProfesores < 1) {
-				throw new IllegalArgumentException( "La capacidad debe ser mayor que cero.");
-			} 
-				coleccionProfesores = new Profesor[capacidadProfesores];
-				this.capacidad = capacidadProfesores;
-				this.tamano = 0;
-			
+	// Constructor por defecto
+	public Profesores() {
+		coleccionProfesores = new ArrayList<>();
+	}
+
+	// Constructor copia
+	public Profesores(Profesores profesores) {
+		if (profesores == null) {
+			throw new NullPointerException(" No se pueden copiar profesores nulos.");
+		} else {
+			setProfesores(profesores);
 		}
-		
-		// Método Profesor[] get()
-	    public Profesor[] get() {
-		return copiaProfundaProfesores();
-	    }
-	    
-		// Método copiaProfundaProfesores
-		private Profesor[] copiaProfundaProfesores() throws IllegalArgumentException, NullPointerException {
-			Profesor[] copiaProfesores = new Profesor[capacidad];
-			for(int i = 0;!tamanoSuperado(i); i++) {
-				copiaProfesores[i] = new Profesor(coleccionProfesores[i]);
-			}
-			return copiaProfesores;
+	}
+	
+	// Método setProfesores(Profesores)
+	private void setProfesores(Profesores profesores) {
+		if (profesores == null) {
+			throw new NullPointerException(" No se puede copiar un profesor nulo.");
+		} else {
+			this.coleccionProfesores = profesores.getProfesores();
 		}
-	    
-
-		public int getTamano() {
-			return tamano;
+	}
+	
+	// Método copiaProfundaProfesores
+	private List<Profesor> copiaProfundaProfesores(List<Profesor> listaProfesores) {
+		List<Profesor> copiaProProfesores = new ArrayList<>();
+		Iterator<Profesor> iterador = listaProfesores.iterator();
+		while (iterador.hasNext()) {
+			copiaProProfesores.add(new Profesor(iterador.next()));
 		}
-		  
-	    public int getCapacidad() {
-		return capacidad;
-	    }
+		return copiaProProfesores;
+	}
 
+	// Método List<Profesor> getProfesores()
+	public List<Profesor> getProfesores() {
+		return copiaProfundaProfesores(coleccionProfesores);
+	}
 
-	    //Método insertar
-		public void insertar(Profesor profesor) throws OperationNotSupportedException{
-	     
+	// Método getNumProfesores
+	public int getNumProfesores() {
+		return coleccionProfesores.size();
+
+	}
+
+	// Método insertar
+	public void insertar(Profesor profesor) throws OperationNotSupportedException {
 		if (profesor == null) {
 			throw new NullPointerException("No se puede insertar un profesor nulo.");
-		}
-		int indice = buscarIndice(profesor);
-	        if (tamanoSuperado(indice)) {
-	            coleccionProfesores[indice] = profesor;
-	            tamano++;
+		} else if (buscar(profesor) == null) {
+			coleccionProfesores.add(new Profesor(profesor));
 		} else {
-	            if (capacidadSuperada(indice)) {
-	            throw new OperationNotSupportedException("El Profesor ya existe.");
-		} else {
-			throw new OperationNotSupportedException("No se aceptan más Profesores.");
-		}		}
-	        
-	    }
-	    
-	    //Método buscarIndice
-	    private int buscarIndice(Profesor profesor) {
-		int indice = 0;
-		boolean profesorEncontrado = false;
-		while (!tamanoSuperado(indice) && !profesorEncontrado) {
-	            if (coleccionProfesores[indice].equals(profesor)) {
-	            profesorEncontrado = true;
-		} else {
-			indice++;
-	            }
+			throw new OperationNotSupportedException("Ya existe un profesor con ese nombre.");
 		}
-	                return indice;
-		}
-	    
-	    private boolean tamanoSuperado (int indice) {
-			return indice >= tamano;
-		}
-	    private boolean capacidadSuperada(int indice) {
-			return indice >= capacidad;
-		}
-		
-	    //Método buscar
-	    public Profesor buscar(Profesor profesor) throws IllegalArgumentException, NullPointerException {
-	    	if (profesor == null) {
-	            throw new NullPointerException("No se puede buscar un profesor nula.");
-	            }
-	    	int indice = buscarIndice(profesor);
-	    	if (tamanoSuperado(indice)) {
-	    			return null;
-	    	} else {
-				Profesor profesorEncontrado = new Profesor(coleccionProfesores[indice]);
-				return profesorEncontrado;
-	    	}
-		}
-	    
-	    //Método borrar
-	    public void borrar(Profesor profesor) throws OperationNotSupportedException {
+	}
+
+	// Método buscar
+	public Profesor buscar(Profesor profesor) {
 		if (profesor == null) {
-	            throw new NullPointerException("No se puede borrar un profesor nula.");
-	            }
-	            int indice = buscarIndice(profesor);
-	            if (!tamanoSuperado(indice)) {
-			desplazarUnaPosicionHaciaIzquierda(indice);
-			}
-	            else {
-			throw new OperationNotSupportedException("El Profesor a borrar no existe.");
-	            }
+			throw new NullPointerException(" No se puede buscar un profesor nulo.");
 		}
-	    
-	    //Método desplazarunaposicionhaciaizquierda
-	    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
-		for (int i = indice; !tamanoSuperado(i); i++) {
-	            coleccionProfesores[i] = coleccionProfesores[i+1];
-	            }
-	            coleccionProfesores[tamano] = null;
-	            tamano--;
+		// Se mira si hay un Profesor que existe en coleccionProfesores
+		Profesor profesorEncontrado = null;
+		int indice = coleccionProfesores.indexOf(profesor);
+		if (indice == -1) {
+			profesorEncontrado = null;
+		} else {
+			profesorEncontrado = new Profesor(coleccionProfesores.get(indice));
 		}
-		
-	    //Método representar
-		public String[] representar() {
-			String[] representacion = new String[tamano];
-			for (int i = 0; !tamanoSuperado(i); i++) {
-				representacion[i] = coleccionProfesores[i].toString();
-			}
-			return representacion;
+		return profesorEncontrado;
+	}
+
+	// Método borrar
+	public void borrar(Profesor profesor) throws OperationNotSupportedException {
+		if (profesor == null) {
+			throw new NullPointerException("No se puede borrar un profesor nulo.");
+		} else if (buscar(profesor) == null) {
+			throw new OperationNotSupportedException("No existe ningún profesor con ese nombre.");
+		} else {
+			coleccionProfesores.remove(coleccionProfesores.indexOf(profesor));
 		}
-		
-	
-}
+	}
+
+	// Metodo representar
+	public List<String> representar() {
+		List<String> representacion = new ArrayList<String>();
+		Iterator<Profesor> iterador = coleccionProfesores.iterator();
+		while (iterador.hasNext()) {
+			representacion.add(iterador.next().toString());
+		}
+		return representacion;
+	}
+}	
