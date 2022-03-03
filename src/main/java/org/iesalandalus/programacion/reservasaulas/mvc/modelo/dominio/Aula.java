@@ -23,7 +23,7 @@ public class Aula {
 	private void setNombre(String nombre) {
 		if(nombre==null)
 			throw new NullPointerException("El nombre del aula no puede ser nulo.");
-		else if (nombre.trim() == ("")) {
+		else if (nombre.trim().equals("")) {
 			throw new IllegalArgumentException("El nombre del aula no puede estar vacío.");
 		} else {
 		this.nombre = nombre;

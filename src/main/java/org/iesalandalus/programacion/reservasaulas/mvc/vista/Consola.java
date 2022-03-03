@@ -57,7 +57,7 @@ public class Consola {
 	        do{
 	            System.out.println("Introduce nombre del aula");
 	            nombreAula=Entrada.cadena();
-	        }while(nombreAula==null||nombreAula.trim() == "");
+	        }while(nombreAula==null||nombreAula.trim().equals (""));
 	        return nombreAula;
 	    }
 	    
@@ -72,7 +72,7 @@ public class Consola {
 	        String telefono = Entrada.cadena();
 	        
 	        
-	        if(telefono==null || telefono.trim() == ""){
+	        if(telefono==null || telefono.trim().equals("")){
 	        	return new Profesor(leerNombreProfesor(), correo);
 	        }else{
 	        	return new Profesor(leerNombreProfesor(), correo, telefono);

@@ -35,7 +35,7 @@ public class Profesor { //Atributos
         if(nombre==null){       
             throw new NullPointerException("El nombre del profesor no puede ser nulo.");
         }
-        else if(nombre.trim() == ""){        
+        else if(nombre.trim() .equals("")){        
             throw new IllegalArgumentException("El nombre del profesor no puede estar vacío.");       
         }
             this.nombre = formateaNombre(nombre);
@@ -62,7 +62,7 @@ public class Profesor { //Atributos
         if(correo==null){
             throw new NullPointerException("El correo del profesor no puede ser nulo.");      
         }
-        if(correo.trim() == "" || !correo.matches(ER_CORREO)){        
+        if(correo.trim().equals("") || !correo.matches(ER_CORREO)){        
             throw new IllegalArgumentException("El correo del profesor no es válido.");         
         }
             this.correo=correo;        
@@ -73,7 +73,7 @@ public class Profesor { //Atributos
 		if (telefono == null) {
 			this.telefono = null;
 		} 
-		else if (telefono.trim() == "" || !telefono.matches(ER_TELEFONO)) {
+		else if (telefono.trim().equals("") || !telefono.matches(ER_TELEFONO)) {
 		      throw new IllegalArgumentException("El teléfono del profesor no es válido.");
 		    }
 
@@ -109,10 +109,13 @@ public class Profesor { //Atributos
 		if (getClass() != obj.getClass())
 			return false;
 		Profesor other = (Profesor) obj;
-		return Objects.equals(correo, other.correo) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(telefono, other.telefono);
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
 	}
-
 	@Override
 	public String toString() {
 		if(telefono == null) {

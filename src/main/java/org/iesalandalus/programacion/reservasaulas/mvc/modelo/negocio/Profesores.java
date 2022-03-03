@@ -9,7 +9,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 public class Profesores {
 	// Atributos
-	List<Profesor> coleccionProfesores;
+	private List<Profesor> coleccionProfesores;
 
 	// Constructor por defecto
 	public Profesores() {

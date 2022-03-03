@@ -14,7 +14,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public class Reservas {
 	// Atributos
-	List<Reserva> coleccionReservas;
+	private List<Reserva> coleccionReservas = new ArrayList<>();
 
 	// Constructor por defecto
 	public Reservas() {

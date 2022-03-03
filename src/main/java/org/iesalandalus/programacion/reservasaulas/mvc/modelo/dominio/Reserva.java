@@ -30,12 +30,12 @@ public class Reserva {
 		if (profesor == null) {
 			throw new NullPointerException("No pueden haber valores nulos");
 		} else {
-			this.profesor = profesor;
+			this.profesor = new Profesor(profesor);
 		}
 	}
 
 	public Profesor getProfesor() {
-		return profesor;
+		return new Profesor(profesor);
 	}
 
 	private void setAula(Aula aula)  {
@@ -47,7 +47,7 @@ public class Reserva {
 	}
 
 	public Aula getAula() {
-		return aula;
+		return new Aula(aula);
 	}
 
 	private void setPermanencia(Permanencia permanencia) {
@@ -59,7 +59,7 @@ public class Reserva {
 	}
 
 	public Permanencia getPermanencia() {
-		return permanencia;
+		return new Permanencia(permanencia);
 	}
 
 
@@ -79,9 +79,19 @@ public class Reserva {
 		if (getClass() != obj.getClass())
 			return false;
 		Reserva other = (Reserva) obj;
-		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia)
-				&& Objects.equals(profesor, other.profesor);
+		if (aula == null) {
+			if (other.aula != null)
+				return false;
+		} else if (!aula.equals(other.aula))
+			return false;
+		if (permanencia == null) {
+			if (other.permanencia != null)
+				return false;
+		} else if (!permanencia.equals(other.permanencia))
+			return false;
+		return true;
 	}
+
 
 	@Override
 	public String toString() {

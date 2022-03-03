@@ -10,7 +10,8 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 
 public class Aulas{
 	
-	List<Aula> coleccionAulas;
+	private List<Aula> coleccionAulas = new ArrayList<>();
+
 
 		public Aulas() {
 			coleccionAulas = new ArrayList<>();
