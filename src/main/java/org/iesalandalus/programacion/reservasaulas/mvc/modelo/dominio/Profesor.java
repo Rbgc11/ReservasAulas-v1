@@ -108,24 +108,20 @@ public class Profesor { //Atributos
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Profesor))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Profesor other = (Profesor) obj;
-		return Objects.equals(correo, other.correo);
+		return Objects.equals(nombre, other.nombre);
 	}
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("nombre=");
-		sb.append(this.nombre);
-		sb.append(", correo=");
-		sb.append(this.correo);
-		if (this.telefono !=null) {
-			sb.append(", telefono=");
-			sb.append(this.telefono);
-		}
-		return sb.toString();
+		if (getTelefono() == null)
+			return "nombre=" + getNombre() + ", correo=" + getCorreo();
+		else
+			return "nombre=" + getNombre() + ", correo=" + getCorreo() + ", telefono=" + getTelefono() ;
 	}
 }
 
