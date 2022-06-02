@@ -74,7 +74,7 @@ public class Reservas {
 	// Método esMesSiguienteOPosterior(Reserva)
 	private boolean esMesSiguienteOPosterior(Reserva reserva) {
 		if (reserva == null) {
-			throw new NullPointerException("ERROR: La reserva no puede ser nula");
+			throw new NullPointerException(" La reserva no puede ser nula");
 		}
 		boolean mesSiguiente = false;
 		Month mes = reserva.getPermanencia().getDia().getMonth();

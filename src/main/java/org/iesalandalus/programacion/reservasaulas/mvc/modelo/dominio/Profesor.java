@@ -44,7 +44,7 @@ public class Profesor { //Atributos
  
   //Método formateaNombre
   		private String formateaNombre(String nombre) {
-  			nombre = nombre.trim().replaceAll("\\s{2,}", " ").toLowerCase();
+  			nombre = nombre.replaceAll("\\s{2,}", " ").trim();
   			String [] formatea = nombre.split(" ");
   			String Nombre2 = "";
   			for (int i=0; i<=formatea.length-1; i++) {
@@ -95,7 +95,11 @@ public class Profesor { //Atributos
     public String getTelefono() {
         return telefono;
     }
-
+    
+	public static Profesor getProfesorFicticio(String correo) {
+		
+		return new Profesor("Nombre", correo);
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(correo, nombre, telefono);
@@ -104,26 +108,24 @@ public class Profesor { //Atributos
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Profesor))
 			return false;
 		Profesor other = (Profesor) obj;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
+		return Objects.equals(correo, other.correo);
 	}
+	
 	@Override
 	public String toString() {
-		if(telefono == null) {
-			return "nombre=" + nombre + ", correo=" + correo ;
-		} else {
-		
-		return "nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono;
+		StringBuilder sb = new StringBuilder();
+		sb.append("nombre=");
+		sb.append(this.nombre);
+		sb.append(", correo=");
+		sb.append(this.correo);
+		if (this.telefono !=null) {
+			sb.append(", telefono=");
+			sb.append(this.telefono);
 		}
+		return sb.toString();
 	}
 }
 

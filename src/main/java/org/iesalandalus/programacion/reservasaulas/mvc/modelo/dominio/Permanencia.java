@@ -1,3 +1,5 @@
+
+
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
 import java.time.LocalDate;

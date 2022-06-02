@@ -21,9 +21,9 @@ public class Aula {
     }
     
 	private void setNombre(String nombre) {
-		if(nombre==null)
+		if(nombre == null)
 			throw new NullPointerException("El nombre del aula no puede ser nulo.");
-		else if (nombre.trim().equals("")) {
+		else if (nombre.isEmpty()) {
 			throw new IllegalArgumentException("El nombre del aula no puede estar vacío.");
 		} else {
 		this.nombre = nombre;

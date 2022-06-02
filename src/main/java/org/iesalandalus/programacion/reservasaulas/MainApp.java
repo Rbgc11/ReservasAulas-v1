@@ -7,7 +7,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.Vista;
 public class MainApp {
 
 	public static void main(String[] args)  {
-		System.out.println("Programa para la gestión de reservas de espacios del IES Al-Ándalus");
+		System.out.println("Programat para la gestión de reservas de espacios del IES Al-Ándalus");
 		Modelo modelo=new Modelo();
 		Vista vista=new Vista();
 		Controlador controlador=new Controlador(modelo,vista);

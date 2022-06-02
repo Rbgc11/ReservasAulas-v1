@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 public class Profesores {
-	// Atributos
+	
 	private List<Profesor> coleccionProfesores;
 
 	// Constructor por defecto

@@ -66,7 +66,7 @@ public class Reserva {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(aula, permanencia, profesor);
+		return Objects.hash(aula, permanencia);
 	}
 
 
@@ -74,25 +74,13 @@ public class Reserva {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Reserva))
 			return false;
 		Reserva other = (Reserva) obj;
-		if (aula == null) {
-			if (other.aula != null)
-				return false;
-		} else if (!aula.equals(other.aula))
-			return false;
-		if (permanencia == null) {
-			if (other.permanencia != null)
-				return false;
-		} else if (!permanencia.equals(other.permanencia))
-			return false;
-		return true;
+		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia);
 	}
 
-
+	//Método toString
 	@Override
 	public String toString() {
 		return "Profesor=" + profesor + ", aula=" + aula + ", permanencia=" + permanencia + "";
